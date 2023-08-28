@@ -10,13 +10,15 @@ export default function submitApplication(req, res) {
 
 		//Sending business details and pre-assessment value
 		const applicationData = { businessDetails, preAssessment };
-		const decisionEngineResponse = simulateDecisionEngine(applicationData);
+		// const decisionEngineResponse = simulateDecisionEngine(applicationData);
 
 		//Sending response to the frontend
-		const message = decisionEngineResponse ? decisionEngineResponse : "Decision Outcome";
+		// const message = decisionEngineResponse ? decisionEngineResponse : "Decision Outcome";
+		const message = "Decision Outcome";
 		if (message) sendResponse(res, 200, false, message);
 		else sendResponse(res, 501, true, "Internal Server Error");
 	} catch (error) {
+		sendResponse(res, 500, true, "Internal Server Error");
 		console.log(error);
 	}
 }
