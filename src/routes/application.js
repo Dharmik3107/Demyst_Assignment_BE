@@ -1,8 +1,12 @@
 import express from "express";
-import initiateApplication from "../controllers/application.js";
+import initiateApplication from "../controllers/initiateApplication.js";
+import fetchBalanceSheet from "../controllers/balanceSheet.js";
+import submitApplication from "../controllers/submitApplication.js";
 
 const router = express.Router();
 
-router.get("/initiate-application", initiateApplication);
+router.post("/initiate-application", initiateApplication);
+router.get("/fetch-balance-sheet", fetchBalanceSheet);
+router.post("/submit-application", submitApplication);
 
 export default router;
