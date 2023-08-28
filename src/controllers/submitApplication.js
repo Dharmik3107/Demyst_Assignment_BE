@@ -13,7 +13,8 @@ export default function submitApplication(req, res) {
 		const decisionEngineResponse = simulateDecisionEngine(applicationData);
 
 		//Sending response to the frontend
-		if (decisionEngineResponse) sendResponse(res, 200, false, decisionEngineResponse);
+		const message = decisionEngineResponse ? decisionEngineResponse : "Decision Outcome";
+		if (message) sendResponse(res, 200, false, message);
 		else sendResponse(res, 501, true, "Internal Server Error");
 	} catch (error) {
 		console.log(error);
