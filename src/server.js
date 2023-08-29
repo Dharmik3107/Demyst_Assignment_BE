@@ -15,7 +15,13 @@ app.use(cors());
 
 app.use("/app", appRouter);
 
-app.listen(env.PORT, (error) => {
-	if (error) console.error(error);
-	console.log(`Server is running on PORT http://localhost:${env.PORT}/app`);
-});
+if (process.env.NODE_ENV !== "test") {
+	app.listen(env.PORT, (error) => {
+		if (error) console.error(error);
+		console.log(`Server is running on PORT http://localhost:${env.PORT}/app`);
+	});
+}
+
+module.exports = {
+	app,
+};

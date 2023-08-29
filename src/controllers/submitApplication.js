@@ -7,19 +7,23 @@ export default function submitApplication(req, res) {
 	try {
 		const { businessDetails, balanceSheet } = req.body;
 
-		//Calculating value of Pre-assessment
-		const preAssessment = calculatePreAssessment(balanceSheet, businessDetails.loanAmount);
+		if (businessDetails && balanceSheet) {
+			//Calculating value of Pre-assessment
+			const preAssessment = calculatePreAssessment(balanceSheet, businessDetails.loanAmount);
 
-		const summary = getProfitLossSummary(balanceSheet);
-		//Sending business details and pre-assessment value
-		const applicationData = { businessDetails, summary, preAssessment };
-		// const decisionEngineResponse = simulateDecisionEngine(applicationData);
+			const summary = getProfitLossSummary(balanceSheet);
+			//Sending business details and pre-assessment value
+			const applicationData = { businessDetails, summary, preAssessment };
+			// const decisionEngineResponse = simulateDecisionEngine(applicationData);
 
-		//Sending response to the frontend
-		// const message = decisionEngineResponse ? decisionEngineResponse : "Decision Outcome";
-		const message = true || false;
-		if (message) sendResponse(res, 200, false, message);
-		else sendResponse(res, 501, true, "Internal Server Error");
+			//Sending response to the frontend
+			// const message = decisionEngineResponse ? decisionEngineResponse : "Decision Outcome";
+			const message = {
+				preAssessment,
+				summary,
+			};
+			sendResponse(res, 200, false, message);
+		} else sendResponse(res, 401, true, "Missing Request Data");
 	} catch (error) {
 		sendResponse(res, 500, true, "Internal Server Error");
 		console.log(error);
