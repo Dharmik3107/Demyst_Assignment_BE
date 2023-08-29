@@ -6,7 +6,7 @@ import submitApplication from "../controllers/submitApplication.js";
 const router = express.Router();
 
 router.post("/initiate-application", initiateApplication);
-router.get("/fetch-balance-sheet", fetchBalanceSheet);
+router.post("/fetch-balance-sheet", fetchBalanceSheet);
 router.post("/submit-application", submitApplication);
 
 export default router;

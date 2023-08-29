@@ -1,15 +1,18 @@
 import sendResponse from "../helpers/sendResponse.js";
+
 import calculatePreAssessment from "../services/ruleService.js";
+import getProfitLossSummary from "../services/summaryProfitLoss.js";
 
 export default function submitApplication(req, res) {
 	try {
-		const { businessDetails, loanAmount, balanceSheet } = req.body;
+		const { businessDetails, balanceSheet } = req.body;
 
 		//Calculating value of Pre-assessment
-		const preAssessment = calculatePreAssessment(balanceSheet, loanAmount);
+		const preAssessment = calculatePreAssessment(balanceSheet, businessDetails.loanAmount);
 
+		const summary = getProfitLossSummary(balanceSheet);
 		//Sending business details and pre-assessment value
-		const applicationData = { businessDetails, preAssessment };
+		const applicationData = { businessDetails, summary, preAssessment };
 		// const decisionEngineResponse = simulateDecisionEngine(applicationData);
 
 		//Sending response to the frontend
