@@ -18,10 +18,10 @@ export default function calculatePreAssessment(balanceSheet, loanAmount) {
 	let preAssessment = 20;
 
 	//If average profit is positive number then pre-assessment value will be 60
-	if (averageProfit > 0) preAssessment = 60;
+	if (averageProfit > 0 && loanAmount > 0) preAssessment = 60;
 
 	//If average assets value is more than loan amount then pre-assessment value will be 100
-	if (averageAssets > loanAmount) preAssessment = 100;
+	if (averageAssets > loanAmount && loanAmount > 0) preAssessment = 100;
 
 	return preAssessment;
 }
