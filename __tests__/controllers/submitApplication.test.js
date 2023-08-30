@@ -21,7 +21,6 @@ describe("Test Route: /app/submit-application POST api", () => {
 			error: false,
 			message: {
 				preAssessment,
-				summary,
 			},
 		});
 	});
